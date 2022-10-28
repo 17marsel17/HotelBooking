@@ -3,7 +3,7 @@ import { IUserService, SearchUserParams } from './interface/user.interface';
 import { User, UserDocument } from './entity/user.entity';
 import { FilterQuery, Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UserService implements IUserService {

@@ -1,14 +1,12 @@
+import { UserService } from '../user/user.service';
+import * as bcrypt from 'bcryptjs';
+import { RegisterDto } from './dto/register.dto';
+import { Role } from '../common/role/role.enum';
 import {
   BadRequestException,
   Injectable,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { User } from '../user/entity/user.entity';
-import { UserService } from '../user/user.service';
-import * as bcrypt from 'bcrypt';
-import { RegisterDto } from './dto/register.dto';
-import { Role } from '../common/role/role.enum';
 
 @Injectable()
 export class AuthService {

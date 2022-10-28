@@ -3,3 +3,7 @@ services:
     image: mongo
     ports:
       - 27017:27017
+  hotel-booking:
+    build: .
+    ports:
+    - 3000:3000

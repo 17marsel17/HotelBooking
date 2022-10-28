@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import {
   ISupportRequestEmployeeService,
   MarkMessagesAsReadDto,
@@ -46,6 +50,22 @@ export class SupportRequestEmployeeService
 
     if (supportRequest?.user.toString() !== params.user.toString()) {
       throw new UnauthorizedException();
+    }
+
+    if (!supportRequest) {
+      throw new NotFoundException(
+        `Запрос с ID ${params.supportRequest} не найден`,
+      );
+    }
+
+    const messages = supportRequest.messages;
+
+    for (const message of messages) {
+      if (!message.readAt && message.author.toString() === params.user) {
+        await this.messageModel.findByIdAndUpdate(message._id, {
+          readAt: new Date(),
+        });
+      }
     }
   }
 }

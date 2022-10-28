@@ -1,9 +1,4 @@
 import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import {
   CreateSupportRequestDto,
   ISupportRequestClientService,
   MarkMessagesAsReadDto,
@@ -11,6 +6,11 @@ import {
 import { Message, SupportRequest } from './entity/support.entity';
 import { Model, Types } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 @Injectable()
 export class SupportRequestClientService
