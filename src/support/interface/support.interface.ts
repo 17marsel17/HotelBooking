@@ -40,11 +40,6 @@ export interface GetCharListParams {
   offset: number;
 }
 
-export interface SupportRequestParams {
-  limit: number;
-  offset: number;
-}
-
 export class SupportRequestParams {
   @Type(() => Number)
   @IsNumber()

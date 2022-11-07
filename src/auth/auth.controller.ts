@@ -2,16 +2,12 @@ import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { UserService } from '../user/user.service';
 import { Request } from 'express';
 import { LocalAuthGuard } from './guard/local-auth.guard';
 
-@Controller('/api')
+@Controller()
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   // Стартует сессию пользователя и выставляет Cookies
   @UseGuards(LocalAuthGuard)

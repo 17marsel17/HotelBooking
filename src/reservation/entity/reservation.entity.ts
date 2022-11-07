@@ -5,8 +5,6 @@ import { User } from '../../user/entity/user.entity';
 import { Hotel } from '../../hotel/entity/hotel.entity';
 import { HotelRoom } from '../../hotel/entity/hotel-room.entity';
 
-export type ReservationDocument = Reservation;
-
 @Schema()
 export class Reservation {
   @ApiProperty({ description: 'id пользователя' })

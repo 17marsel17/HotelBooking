@@ -16,12 +16,10 @@ export class UserService implements IUserService {
     }
 
     data.passwordHash = bcrypt.hashSync(data.passwordHash || '', 10);
-    const newUser = await this.userModel.create(data);
 
-    return newUser;
+    return await this.userModel.create(data);
   }
 
-  // TODO
   findAll(params: SearchUserParams): Promise<User[]> {
     let searchParams: FilterQuery<UserDocument> = {};
     if (params) {
@@ -38,12 +36,11 @@ export class UserService implements IUserService {
       }
     }
 
-    const users = this.userModel
+    return this.userModel
       .find(searchParams)
       .limit(params.limit)
       .skip(params.offset)
       .exec();
-    return users;
   }
 
   async findByEmail(email: string): Promise<User | null> {

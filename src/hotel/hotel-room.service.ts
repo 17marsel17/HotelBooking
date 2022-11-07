@@ -25,10 +25,7 @@ export class HotelRoomService implements IHotelRoomService {
     });
   }
 
-  async findById(
-    id: string | Types.ObjectId,
-    isEnabled?: true,
-  ): Promise<HotelRoom | null> {
+  async findById(id: string | Types.ObjectId): Promise<HotelRoom | null> {
     return await this.hotelRoomModel.findById(id).exec();
   }
 
@@ -38,14 +35,13 @@ export class HotelRoomService implements IHotelRoomService {
     if (params) {
       const { title, isEnabled, hotel } = params;
 
-      // title это ID?
       if (title) {
         searchParams.title = { $regex: title, $options: 'i' };
       }
 
-      if (isEnabled) {
-        searchParams.isEnabled = true;
-      }
+      isEnabled
+        ? (searchParams.isEnabled = true)
+        : (searchParams.isEnabled = undefined);
 
       if (hotel) {
         searchParams.hotel = hotel;
