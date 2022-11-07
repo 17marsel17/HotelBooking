@@ -12,7 +12,6 @@ import { SupportService } from './support.service';
 import {
   GetCharListParams,
   MarkMessagesAsReadDto,
-  CreateSupportRequestDto,
   SendMessageDto,
   SupportRequestParams,
 } from './interface/support.interface';
@@ -24,7 +23,7 @@ import { Roles } from '../common/role/roles.decorator';
 import { Role } from '../common/role/role.enum';
 import { AuthenticatedGuard } from '../auth/guard/authenticated.guard';
 
-@Controller('/api')
+@Controller()
 @UseGuards(AuthenticatedGuard, RolesGuard)
 export class SupportController {
   constructor(
@@ -66,7 +65,7 @@ export class SupportController {
   // Позволяет пользователю с ролью manager или client получить все сообщения из чата
   @Roles(Role.manager, Role.client)
   @Get('/common/support-requests/:id/messages')
-  getSupportRequestMessagesById(@Param() params: any) {
+  getSupportRequestMessagesById(@Param() params: { id: string }) {
     return this.supportService.getMessages(params.id);
   }
 

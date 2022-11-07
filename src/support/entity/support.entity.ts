@@ -3,9 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 import { User } from '../../user/entity/user.entity';
 
-export type SupportRequestDocument = SupportRequest;
-export type MessageDocument = Message;
-
 @Schema()
 export class SupportRequest {
   _id?: string;

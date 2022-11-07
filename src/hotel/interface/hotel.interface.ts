@@ -1,7 +1,13 @@
 import { Hotel } from '../entity/hotel.entity';
 import { HotelRoom } from '../entity/hotel-room.entity';
 import { Types } from 'mongoose';
-import { IsDefined, IsNumber, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDefined,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -23,8 +29,16 @@ export class SearchRoomsParams {
   @IsNumber()
   @IsDefined()
   offset: number;
-  title: string; // ??
-  isEnabled?: true;
+
+  @ApiProperty({ description: 'Название гостиницы' })
+  @IsString()
+  @IsDefined()
+  title: string;
+
+  @ApiProperty({ description: 'Флаг доступности номера' })
+  @IsBoolean()
+  @IsOptional()
+  isEnabled?: boolean;
 
   @IsString()
   @IsDefined()

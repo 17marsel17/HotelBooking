@@ -27,7 +27,7 @@ import { RolesGuard } from '../common/role/roles.guard';
 import { Roles } from '../common/role/roles.decorator';
 import { Role } from '../common/role/role.enum';
 
-@Controller('/api')
+@Controller()
 @UseGuards(RolesGuard)
 export class HotelController {
   constructor(
@@ -43,7 +43,7 @@ export class HotelController {
 
   // Получение подробной информации о номере
   @Get('/common/hotel-rooms/:id')
-  async findHotelRoomById(@Param() params: any) {
+  async findHotelRoomById(@Param() params: { id: string }) {
     try {
       return await this.hotelRoomsService.findById(params.id);
     } catch {
@@ -72,7 +72,7 @@ export class HotelController {
   @Put('/admin/hotels/:id')
   @Roles(Role.admin)
   async updateHotel(
-    @Param() params: any,
+    @Param() params: { id: string },
     @Body() createHotelDto: CreateHotelDto,
   ) {
     return await this.hotelService.update(params.id, createHotelDto);
@@ -103,7 +103,6 @@ export class HotelController {
     const data = {
       hotel: createHotelRoomDto.hotelId,
       description: createHotelRoomDto.description,
-      title: createHotelRoomDto.title,
       images: imagesPath,
     };
 
@@ -123,7 +122,7 @@ export class HotelController {
   @Put('/admin/hotel-rooms/:id')
   @Roles(Role.admin)
   async updateHotelRoom(
-    @Param() params: any,
+    @Param() params: { id: string },
     @UploadedFiles() images: Array<Express.Multer.File>,
     @Body() createHotelRoomDto: CreateHotelRoomDto,
   ) {
@@ -136,7 +135,6 @@ export class HotelController {
     const data = {
       hotel: createHotelRoomDto.hotelId,
       description: createHotelRoomDto.description,
-      title: createHotelRoomDto.title,
       images: imagesPath,
     };
 

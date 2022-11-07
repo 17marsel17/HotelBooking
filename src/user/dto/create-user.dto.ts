@@ -6,18 +6,22 @@ export class CreateUserDto {
   @IsString()
   @IsDefined()
   email: string;
+
   @ApiProperty({ description: 'Пароль' })
   @IsString()
   @IsDefined()
   password: string;
+
   @ApiProperty({ description: 'Имя пользователя' })
   @IsString()
   @IsDefined()
   name: string;
+
   @ApiProperty({ description: 'Номер телефона' })
   @IsString()
   @IsDefined()
   contactPhone: string;
+
   @ApiProperty({ description: 'Роль пользователя' })
   @IsString()
   @IsDefined()

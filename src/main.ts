@@ -5,6 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.setGlobalPrefix('api');
+
   const options = new DocumentBuilder()
     .setTitle('Hotel reservation')
     .setDescription('The hotel reservation api description')
